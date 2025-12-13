@@ -9,29 +9,21 @@ public class ConfigurationReader {
      //1- Create the Properties object (create object)
     //make it "private" so we are limiting access to the object
     //"static" is to make sure its created and loaded before everything else.
-    private static Properties properties = new Properties();
+	 private static Properties properties;
 
-    static{
+	static {
+		try {
+			FileInputStream file = new FileInputStream("configuration.properties");
+			properties = new Properties();
+			properties.load(file);
+			file.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+			throw new RuntimeException("Failed to load configuration.properties file!");
+		}
+	}
 
-        try {
-            //2- Open file using FileInputStream (open file)
-            FileInputStream file = new FileInputStream("configuration.properties");
-            //3- Load the "properties" object with "file" (load properties)
-            properties.load(file);
-
-            //close the file in the memory
-            file.close();
-
-        } catch (IOException e) {
-            System.out.println("FILE NOT FOUND WITH GIVEN PATH!!!");
-            e.printStackTrace();
-        }
-    }
-
-    //create a utility method to use the object to read
-    //4- Use "properties" object to read from the file (read properties)
-
-    public static String getProperty(String url){
-        return properties.getProperty(url);
-    }
-}
+	public static String getProperty(String key) {
+		return properties.getProperty(key);
+	}
+	}
