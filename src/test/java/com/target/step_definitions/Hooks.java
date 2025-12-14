@@ -35,9 +35,10 @@ public class Hooks {
 //
 //    }
 
-    @Before("@ui")
-    public void setUp() {
-        Driver.getDriver().get(ConfigurationReader.getProperty("library_url"));
+	@Before
+	public void setUp() {
+		String baseUrl = ConfigurationReader.getProperty("url");
+		Driver.getDriver().get(baseUrl);   // ✅ navigate to Target homepage
         Driver.getDriver().manage().window().maximize();
         Driver.getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 
@@ -49,6 +50,6 @@ public class Hooks {
             final byte[] screenshot = ((TakesScreenshot) Driver.getDriver()).getScreenshotAs(OutputType.BYTES);
             scenario.attach(screenshot, "image/png","screenshot");
         }
-        Driver.closeDriver();
+		Driver.closeDriver();
     }
 }

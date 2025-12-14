@@ -41,6 +41,14 @@
             <version>7.3.2</version>
         </dependency>
 
+        <!-- PicoContainer for Dependency Injection -->
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-picocontainer</artifactId>
+            <version>7.15.0</version>
+            <scope>test</scope>
+        </dependency>
+
         <dependency>
             <groupId>me.jvt.cucumber</groupId>
             <artifactId>reporting-plugin</artifactId>
