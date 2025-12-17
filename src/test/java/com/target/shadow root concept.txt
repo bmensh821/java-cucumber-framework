@@ -1,0 +1,19 @@
+ SHADOW DOM:
+browser --> Page Dom --> shadow dom --> shadow dom --> element
+
+Locate the element - right click - copy - copy js path - open the console - clear the console - paste in console - copy the js path from console - in your intellij store the js path in String variable - in the beginning of the jsPath write return.
+
+Example:
+
+String jsPath = "return your js path";
+
+then you need to top cast driver into js executor:
+JavascriptExecutor js = (JavascriptExecutor) driver;
+
+then convert your js into web element:
+WebElement pizza = (WebElement) js.executeScript(jsPath);
+
+then you can send keys, or click, what ever is you testing task.
+pizza.sendKeys(vegPizza);
+
+
